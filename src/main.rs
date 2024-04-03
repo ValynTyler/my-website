@@ -1,12 +1,10 @@
 #[macro_use] extern crate rocket;
 
+use rocket::fs::NamedFile;
+
 #[get("/")]
-fn index() -> &'static str {
-    "
-    - itch: https://valyn-tyler.itch.io
-    - twitter: https://twitter.com/ValynTyler
-    - discord: `valyntyler`
-    "
+async fn index() -> Option<NamedFile> {
+    NamedFile::open("index.html").await.ok()
 }
 
 #[launch]
